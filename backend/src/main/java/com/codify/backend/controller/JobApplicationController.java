@@ -30,8 +30,9 @@ public class JobApplicationController {
 		
 	}
 	
+	// TODO: needs to take in JobApplicationRequest
 	@PostMapping
-	public void createJobApplication(JobApplication jobAppRequest) {
+	public void createJobApplication() {
 		
 	}
 }
