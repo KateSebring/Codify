@@ -1,8 +1,7 @@
 package com.codify.backend.model;
 
+import com.codify.backend.enums.Status;
 import java.time.LocalDate;
-import com.codify.backend.Status;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

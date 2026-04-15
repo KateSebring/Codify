@@ -1,4 +1,4 @@
-package com.codify.backend;
+package com.codify.backend.enums;
 
 public enum Status {
 	APPLIED,
