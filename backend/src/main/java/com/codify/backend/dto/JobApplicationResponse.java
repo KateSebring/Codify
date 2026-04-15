@@ -1,8 +1,7 @@
 package com.codify.backend.dto;
 
+import com.codify.backend.enums.Status;
 import java.time.LocalDate;
-
-import com.codify.backend.Status;
 
 public record JobApplicationResponse(
 	String positionTitle,
