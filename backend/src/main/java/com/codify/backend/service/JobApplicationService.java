@@ -27,8 +27,8 @@ public class JobApplicationService {
 		return jobApplicationRepository.save(jobApplication);
 	}
 	
-	public JobApplication updateJobApplication(int id, JobApplication updatedJobApplication) {
-		JobApplication jobApplication = jobApplicationRepository.findById(id).orElseThrow();
+	public JobApplication updateJobApplication(JobApplication updatedJobApplication) {
+		JobApplication jobApplication = jobApplicationRepository.findById(updatedJobApplication.getJobAppId()).orElseThrow();
 		
 		jobApplication.setCompany(updatedJobApplication.getCompany());
 		jobApplication.setDateApplied(updatedJobApplication.getDateApplied());

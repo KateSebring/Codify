@@ -31,11 +31,15 @@ public class JobApplicationController {
 	
 	@PostMapping
 	public ResponseEntity<JobApplicationResponse> createJobApplication(JobApplicationRequest request) {
+		// use mapper to pass in jobapplication object
 		return ResponseEntity.ok(null);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> updateJobApplication(int id, JobApplicationRequest request) {
+	public ResponseEntity<JobApplicationResponse> updateJobApplication(JobApplicationRequest request) {
+		// use mapper to pass in jobapplication object
+		// JobApplication jobApp = mapper.toJobApplication(request);
+		// jobApplicationService.updateJobApplication(jobApp);
 		return ResponseEntity.ok(null);
 	}
 	

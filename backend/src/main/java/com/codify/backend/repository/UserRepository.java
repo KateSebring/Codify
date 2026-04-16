@@ -4,8 +4,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.codify.backend.model.User;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
-	boolean existsById(int id); // check if user exists
-	
+public interface UserRepository extends JpaRepository<User, Integer> {	
 	Optional<User> findById(int id); // attempt to find user
+	
+	Optional<User> findByUsername(String username);
+	
+	Optional<User> findByEmail(String email);
 }
