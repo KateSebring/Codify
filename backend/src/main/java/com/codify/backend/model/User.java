@@ -1,5 +1,8 @@
 package com.codify.backend.model;
 import java.time.LocalDate;
+import java.util.Set;
+
+import com.codify.backend.enums.Role;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,5 +26,7 @@ public class User {
 	private String lastName;
 	private LocalDate dob;
 	private String email;
-	private String role;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	private Set<Role> roles;
 }

@@ -1,7 +1,6 @@
 package com.codify.backend.service;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import com.codify.backend.model.JobApplication;
 import com.codify.backend.repository.JobApplicationRepository;
