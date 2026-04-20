@@ -1,9 +1,12 @@
 package com.codify.backend.service;
 
+import java.util.Set;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codify.backend.dto.RegistrationRequest;
+import com.codify.backend.enums.Role;
 import com.codify.backend.model.User;
 import com.codify.backend.repository.UserRepository;
 @Service
@@ -55,6 +58,7 @@ public class RegistrationService {
 		user.setDob(request.dob());
 		user.setUsername(request.username());
 		user.setPasswordHash(passwordEncoder.encode(request.password()));
+		user.setRoles(Set.of(Role.USER));
 		
 		return user;
 	}
