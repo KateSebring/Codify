@@ -15,10 +15,11 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
 		http
-			.csrf(Customizer.withDefaults())
+			.csrf(csrf -> csrf.disable())
 			.httpBasic(Customizer.withDefaults())
 			.formLogin(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
+					.requestMatchers("/", "/api/register").permitAll()
 					.anyRequest().authenticated()
 			);
 		
