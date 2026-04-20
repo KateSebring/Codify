@@ -1,0 +1,32 @@
+package com.codify.backend.security;
+
+import org.springframework.context.annotation.*;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+	@Bean
+	public SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
+		http
+			.csrf(Customizer.withDefaults())
+			.httpBasic(Customizer.withDefaults())
+			.formLogin(Customizer.withDefaults())
+			.authorizeHttpRequests((authorize) -> authorize
+					.anyRequest().authenticated()
+			);
+		
+		return http.build();
+	}
+
+	@Bean
+	public PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
+	}
+}

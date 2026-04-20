@@ -5,6 +5,7 @@ import com.codify.backend.dto.JobApplicationRequest;
 import com.codify.backend.dto.JobApplicationResponse;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.codify.backend.model.JobApplication;
@@ -12,15 +13,15 @@ import com.codify.backend.model.JobApplication;
 @RestController
 @RequestMapping("/api/applications")
 public class JobApplicationController {
-	JobApplicationService jobApplicationService;
+	private final JobApplicationService jobApplicationService;
 	
-	public JobApplicationController (JobApplicationService jobApplicationService) {
+	public JobApplicationController(JobApplicationService jobApplicationService) {
 		this.jobApplicationService = jobApplicationService;
 	}
 	
 	// TODO: add authentication as required parameter for each mapping
 	@GetMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> getJobApplication(int id) {
+	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id) {
 		return ResponseEntity.ok(null);
 	}
 	
@@ -30,13 +31,13 @@ public class JobApplicationController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<JobApplicationResponse> createJobApplication(JobApplicationRequest request) {
+	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request) {
 		// use mapper to pass in jobapplication object
 		return ResponseEntity.ok(null);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> updateJobApplication(JobApplicationRequest request) {
+	public ResponseEntity<JobApplicationResponse> updateJobApplication(@RequestBody JobApplicationRequest request) {
 		// use mapper to pass in jobapplication object
 		// JobApplication jobApp = mapper.toJobApplication(request);
 		// jobApplicationService.updateJobApplication(jobApp);
@@ -44,7 +45,7 @@ public class JobApplicationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteJobApplication(int id) {
+	public ResponseEntity<Void> deleteJobApplication(@RequestBody int id) {
 		return ResponseEntity.noContent().build();
 	}
 }
