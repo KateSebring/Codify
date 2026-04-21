@@ -1,6 +1,7 @@
 package com.codify.backend.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,11 +31,15 @@ public class AuthService {
 		);
 	}
 	
-	public String loginUser(LoginRequest request) throws Exception {
+	public String loginUser(LoginRequest request) throws BadCredentialsException {
 		request = this.trimRequest(request);		
 		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
 		
-		return "token-goes-here-whoo";
+		if(authentication.isAuthenticated()) {
+			return "Success!";
+		}
+		
+		return "Failure :(";
 	}
 }
