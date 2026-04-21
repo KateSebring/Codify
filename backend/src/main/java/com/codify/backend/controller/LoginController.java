@@ -21,13 +21,9 @@ public class LoginController {
 	@PostMapping
 	public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) throws Exception {
 		String token = authService.loginUser(request);
-		Set<String> userRoleSet = request.roles().stream()
-				.map(role -> "ROLE_" + role)
-				.collect(Collectors.toSet());
 		
 		LoginResponse response = new LoginResponse(
 				request.username().trim(),
-				userRoleSet,
 				token);
 		return ResponseEntity.ok(response);
 	}

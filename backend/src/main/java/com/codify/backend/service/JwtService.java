@@ -1,5 +1,6 @@
 package com.codify.backend.service;
 
+import java.util.List;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,20 +16,25 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-	
+	private final long EXPIRATION = 1000L * 60 * 60;
 	@Value("${jwt.secret}")
 	private String secretKey;
 
 	public String generateToken(Authentication authentication) {
 		Map<String, Object> claims =  new HashMap<>();
 		
+		List<String> userRoles = authentication.getAuthorities()
+			.stream()
+			.map(grantedAuthority -> grantedAuthority.getAuthority())
+			.toList();
+		
+		claims.put("roles", userRoles);
+		
 		return Jwts.builder()
-				.claims()
-				.add(claims)
+				.claims(claims)
 				.subject(authentication.getName())
 				.issuedAt(new Date(System.currentTimeMillis()))
-				.expiration(new Date(System.currentTimeMillis() * 60 * 60 * 60))
-				.and()
+				.expiration(new Date(System.currentTimeMillis() + EXPIRATION))
 				.signWith(getSigningKey())
 				.compact();
 	}

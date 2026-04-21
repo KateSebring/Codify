@@ -20,9 +20,8 @@ public class AuthService {
 	public LoginRequest trimRequest(LoginRequest request) {
 		return new LoginRequest(
 				request.username().trim(),
-				request.password(),
-				request.roles()
-		);
+				request.password()		
+			);
 	}
 	
 	public String loginUser(LoginRequest request) throws BadCredentialsException {

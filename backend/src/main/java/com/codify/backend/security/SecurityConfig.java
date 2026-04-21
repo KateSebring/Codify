@@ -14,13 +14,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.codify.backend.service.CustomUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	
-	private final UserDetailsService userDetailsService;
+	private final CustomUserDetailsService userDetailsService;
 	
-	public SecurityConfig(UserDetailsService userDetailsService) {
+	public SecurityConfig(CustomUserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
