@@ -16,7 +16,12 @@ public class LoginController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) {
-		return ResponseEntity.ok(null);
+	public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) throws Exception {
+		String token = authService.loginUser(request);
+		LoginResponse response = new LoginResponse(
+				request.username().trim(),
+				"USER",
+				token);
+		return ResponseEntity.ok(response);
 	}
 }
