@@ -1,5 +1,8 @@
 package com.codify.backend.service;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,30 +14,26 @@ import com.codify.backend.repository.UserRepository;
 public class AuthService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final AuthenticationManager authenticationManager;
 	
-	public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+	public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.authenticationManager = authenticationManager;
 	}
 	
 	public LoginRequest trimRequest(LoginRequest request) {
 		return new LoginRequest(
 				request.username().trim(),
-				request.password()
+				request.password(),
+				request.roles()
 		);
 	}
 	
 	public String loginUser(LoginRequest request) throws Exception {
 		request = this.trimRequest(request);		
-		User foundUser = userRepository.findByUsername(
-				request.username())
-				.orElseThrow(() -> 
-				new Exception("Username or password was incorrect.")
-			);
 		
-		if(!passwordEncoder.matches(request.password(), foundUser.getPasswordHash())) {
-			throw new Exception("Username or password was incorrect.");
-		}
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
 		
 		return "token-goes-here-whoo";
 	}
