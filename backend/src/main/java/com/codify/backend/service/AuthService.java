@@ -4,7 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codify.backend.dto.LoginRequest;
-import com.codify.backend.dto.RegistrationRequest;
 import com.codify.backend.model.User;
 import com.codify.backend.repository.UserRepository;
 

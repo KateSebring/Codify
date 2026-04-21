@@ -74,6 +74,7 @@ public class RegistrationService {
 			throw new Exception("Error: empty field.");
 		}
 		
+		// save user and return a JWT token if all is successful
 		return repo.save(initializeUser(request));
 	}
 }
