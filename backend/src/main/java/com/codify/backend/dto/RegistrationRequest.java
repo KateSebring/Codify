@@ -8,5 +8,5 @@ public record RegistrationRequest(
 	String username,
 	String email,
 	String password,
-	LocalDate dob) 
-{}
+	LocalDate dob
+){}

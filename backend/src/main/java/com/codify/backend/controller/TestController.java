@@ -10,4 +10,9 @@ public class TestController {
 	public String home() {
 		return "<h1>Welcome, user!</h1>";
 	}
+	
+	@GetMapping("/authorized")
+	public String auth() {
+		return "<h1>Successfuly authorized</h1>";
+	}
 }
