@@ -9,6 +9,5 @@ public record JobApplicationResponse(
 	int salary,
 	String jobListingURL,
 	Status status,
-	LocalDate dateApplied,
-	String token
-){}
+	LocalDate dateApplied
+	){}
