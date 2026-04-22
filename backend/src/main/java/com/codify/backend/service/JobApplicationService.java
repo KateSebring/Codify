@@ -16,6 +16,14 @@ public class JobApplicationService {
 	UserRepository userRepository;
 	JobApplicationRepository jobApplicationRepository;
 	
+	public User verifyAuth(Authentication authentication) throws Exception {
+		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+		User user = userRepository
+				.findByUsername(userPrincipal.getUsername())
+				.orElseThrow(() -> new Exception("User not found."));
+		return user;
+	}
+	
 	public JobApplicationService(JobApplicationRepository jobApplicationRepository, UserRepository userRepository) {
 		this.jobApplicationRepository = jobApplicationRepository;
 		this.userRepository = userRepository;
@@ -28,11 +36,9 @@ public class JobApplicationService {
 	}
 	
 	public List<JobApplication> getAllJobApplications(Authentication authentication) throws Exception {
-		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
-		User user = userRepository
-				.findByUsername(userPrincipal.getUsername())
-				.orElseThrow(() -> new Exception("User not found."));
-		return null;
+		User user = verifyAuth(authentication);
+		List<JobApplication> userJobApplications = jobApplicationRepository.findAllByUserId(user.getUserId());
+		return userJobApplications;
 	}
 	
 	public JobApplication createJobApplication(JobApplication jobApplication) {
@@ -52,7 +58,7 @@ public class JobApplicationService {
 		return jobApplicationRepository.save(jobApplication);
 	}
 	
-	public void deleteJobApplication(int id)  {
+	public void deleteJobApplication(int id, Authentication authentication)  {
 		jobApplicationRepository.deleteById(id);
 	}
 }

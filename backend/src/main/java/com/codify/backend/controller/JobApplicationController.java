@@ -38,8 +38,9 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(Authentication authentication) throws Exception {
+	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(@RequestBody Authentication authentication) throws Exception {
 		List<JobApplication> jobApplications = jobApplicationService.getAllJobApplications(authentication);
+		// TODO: replace this with a mapping helper class
 		List<JobApplicationResponse> jobApplicationResponses = new ArrayList<JobApplicationResponse>();
 		for(JobApplication jobApplication : jobApplications) {
 			JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
@@ -69,7 +70,8 @@ public class JobApplicationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteJobApplication(@RequestBody int id) {
+	public ResponseEntity<Void> deleteJobApplication(@RequestBody int id, Authentication authentication) {
+		jobApplicationService.deleteJobApplication(id, authentication);
 		return ResponseEntity.noContent().build();
 	}
 }
