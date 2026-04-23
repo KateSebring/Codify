@@ -25,8 +25,7 @@ public class RegistrationController {
 				user.getUsername(),
 				user.getRoles().stream()
 				    .map(Enum::name)
-				    .collect(Collectors.toSet()),
-				"fake-token-blahblah"
+				    .collect(Collectors.toSet())
 			);
 		return ResponseEntity.ok(response);
 	}
