@@ -3,10 +3,13 @@ package com.codify.backend.controller;
 import com.codify.backend.service.JobApplicationService;
 import com.codify.backend.dto.JobApplicationRequest;
 import com.codify.backend.dto.JobApplicationResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.codify.backend.model.JobApplication;
 
@@ -21,13 +24,35 @@ public class JobApplicationController {
 	
 	// TODO: add authentication as required parameter for each mapping
 	@GetMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id) {
-		return ResponseEntity.ok(null);
+	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) throws Exception {
+		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
+		
+		return ResponseEntity.ok(new JobApplicationResponse(
+				jobApplication.getPositionTitle(),
+				jobApplication.getCompany(),
+				jobApplication.getSalary(),
+				jobApplication.getJobListingURL(),
+				jobApplication.getStatus(),
+				jobApplication.getDateApplied()
+			));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<JobApplication>> getAllJobApplications() {
-		return ResponseEntity.ok(null);
+	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(@RequestBody Authentication authentication) throws Exception {
+		List<JobApplication> jobApplications = jobApplicationService.getAllJobApplications(authentication);
+		// TODO: replace this with a mapping helper class
+		List<JobApplicationResponse> jobApplicationResponses = new ArrayList<JobApplicationResponse>();
+		for(JobApplication jobApplication : jobApplications) {
+			JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
+					jobApplication.getPositionTitle(),
+					jobApplication.getCompany(),
+					jobApplication.getSalary(),
+					jobApplication.getJobListingURL(),
+					jobApplication.getStatus(),
+					jobApplication.getDateApplied());
+			jobApplicationResponses.add(jobApplicationResponse);
+		}
+		return ResponseEntity.ok(jobApplicationResponses);
 	}
 	
 	@PostMapping
@@ -45,7 +70,8 @@ public class JobApplicationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteJobApplication(@RequestBody int id) {
+	public ResponseEntity<Void> deleteJobApplication(@RequestBody int id, Authentication authentication) {
+		jobApplicationService.deleteJobApplication(id, authentication);
 		return ResponseEntity.noContent().build();
 	}
 }
