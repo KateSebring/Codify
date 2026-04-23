@@ -8,7 +8,6 @@ import java.util.Set;
 import com.codify.backend.enums.Role;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

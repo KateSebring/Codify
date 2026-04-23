@@ -1,6 +1,5 @@
 package com.codify.backend.service;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -18,32 +17,28 @@ public class JobApplicationService {
 	UserRepository userRepository;
 	JobApplicationRepository jobApplicationRepository;
 	
-	public User getCurrentUser(Authentication authentication) throws Exception {
-		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
-		User user = userRepository
-				.findByUsername(userPrincipal.getUsername())
-				.orElseThrow(() -> new Exception("User not found."));
-		return user;
-	}
-	
 	public JobApplicationService(JobApplicationRepository jobApplicationRepository, UserRepository userRepository) {
 		this.jobApplicationRepository = jobApplicationRepository;
 		this.userRepository = userRepository;
 	}
+	
+	public User getCurrentUser(Authentication authentication) throws Exception {
+		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+		return userRepository
+				.findByUsername(userPrincipal.getUsername())
+				.orElseThrow(() -> new Exception("User not found."));
+	}
 
 	public JobApplication getJobApplication(int id, Authentication authentication) throws Exception {
 		User user = getCurrentUser(authentication);
-		JobApplication jobApplication = jobApplicationRepository
-				.findById(id)
+		return  jobApplicationRepository
+				.findByIdAndUserId(id, user.getUserId())
 				.orElseThrow(() -> new Exception("Job application not found."));
-		
-		return null;
 	}
 	
 	public List<JobApplication> getAllJobApplications(Authentication authentication) throws Exception {
 		User user = getCurrentUser(authentication);
-		List<JobApplication> userJobApplications = jobApplicationRepository.findAllByUserId(user.getUserId());
-		return userJobApplications;
+		return jobApplicationRepository.findAllByUserId(user.getUserId());
 	}
 	
 	public JobApplication createJobApplication(JobApplicationRequest jobApplicationRequest, Authentication authentication) throws Exception {
@@ -59,8 +54,11 @@ public class JobApplicationService {
 		return jobApplicationRepository.save(jobApplication);
 	}
 	
-	public JobApplication updateJobApplication(JobApplication updatedJobApplication) {
-		JobApplication jobApplication = jobApplicationRepository.findById(updatedJobApplication.getJobAppId()).orElseThrow();
+	public JobApplication updateJobApplication(JobApplication updatedJobApplication) throws Exception {
+		JobApplication jobApplication = jobApplicationRepository
+				.findById(updatedJobApplication
+						.getJobAppId())
+				.orElseThrow(() -> new Exception("Job application not found."));
 		
 		jobApplication.setCompany(updatedJobApplication.getCompany());
 		jobApplication.setDateApplied(updatedJobApplication.getDateApplied());
