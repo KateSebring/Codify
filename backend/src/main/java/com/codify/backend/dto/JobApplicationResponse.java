@@ -10,4 +10,4 @@ public record JobApplicationResponse(
 	String jobListingURL,
 	Status status,
 	LocalDate dateApplied
-	){}
+){}

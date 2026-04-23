@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.codify.backend.dto.LoginRequest;
+import com.codify.backend.exceptions.InvalidUsernameOrPasswordException;
 
 @Service
 public class AuthService {
@@ -24,10 +25,16 @@ public class AuthService {
 			);
 	}
 	
-	public String loginUser(LoginRequest request) throws BadCredentialsException {
-		request = this.trimRequest(request);		
+	public String loginUser(LoginRequest request) {
+		Authentication authentication;
 		
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+		request = this.trimRequest(request);	
+		
+		try {
+			authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
+		} catch (BadCredentialsException e) {
+			throw new InvalidUsernameOrPasswordException();
+		}
 		
 		return jwtService.generateToken(authentication);
 	}
