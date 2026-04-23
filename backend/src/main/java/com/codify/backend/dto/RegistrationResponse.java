@@ -4,6 +4,5 @@ import java.util.Set;
 
 public record RegistrationResponse(
 	String username, 
-	Set<String> roles,
-	String token
+	Set<String> roles
 ){}
