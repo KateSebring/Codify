@@ -12,9 +12,9 @@ import com.codify.backend.repository.UserRepository;
 @Service
 public class RegistrationService {
 	private final PasswordEncoder passwordEncoder;
-	private final UserRepository repo;
-	public RegistrationService(UserRepository registrationRepository, PasswordEncoder passwordEncoder) {
-		this.repo = registrationRepository;
+	private final UserRepository userRepository;
+	public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
 	
@@ -50,14 +50,17 @@ public class RegistrationService {
 		return false;
 	}
 	
-	public User initializeUser(RegistrationRequest request) {
-		User user = new User();
-		user.setFirstName(request.firstName());
-		user.setLastName(request.lastName());
-		user.setEmail(request.email());
-		user.setDob(request.dob());
-		user.setUsername(request.username());
-		user.setPasswordHash(passwordEncoder.encode(request.password()));
+	// create a new user that will be saved
+	public User initializeUser(RegistrationRequest request) {		
+		User user = new User(
+				request.username(),
+				passwordEncoder.encode(request.password()),
+				request.firstName(),
+				request.lastName(),
+				request.dob(),
+				request.email()
+				);
+		
 		user.setRoles(Set.of(Role.USER));
 		
 		return user;
@@ -66,7 +69,7 @@ public class RegistrationService {
 	public User register(RegistrationRequest request) throws Exception {
 		request = this.trimRequest(request);
 		
-		if(repo.existsByEmail(request.email()) || repo.existsByUsername(request.username())) {
+		if(userRepository.existsByEmail(request.email()) || userRepository.existsByUsername(request.username())) {
 			throw new Exception("Error: Username or email already exists.");
 		}
 		
@@ -74,7 +77,6 @@ public class RegistrationService {
 			throw new Exception("Error: empty field.");
 		}
 		
-		// save user and return a JWT token if all is successful
-		return repo.save(initializeUser(request));
+		return userRepository.save(initializeUser(request));
 	}
 }
