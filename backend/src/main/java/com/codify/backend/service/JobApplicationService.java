@@ -54,18 +54,19 @@ public class JobApplicationService {
 		return jobApplicationRepository.save(jobApplication);
 	}
 	
-	public JobApplication updateJobApplication(JobApplication updatedJobApplication) throws Exception {
+	public JobApplication updateJobApplication(int id, JobApplicationRequest updatedJobApplication, Authentication authentication) throws Exception {
+		User user = getCurrentUser(authentication);
 		JobApplication jobApplication = jobApplicationRepository
-				.findById(updatedJobApplication
-						.getJobAppId())
+				.findByIdAndUserId(id, user.getUserId())
 				.orElseThrow(() -> new Exception("Job application not found."));
 		
-		jobApplication.setCompany(updatedJobApplication.getCompany());
-		jobApplication.setDateApplied(updatedJobApplication.getDateApplied());
-		jobApplication.setJobListingURL(updatedJobApplication.getJobListingURL());
-		jobApplication.setPositionTitle(updatedJobApplication.getPositionTitle());
-		jobApplication.setSalary(updatedJobApplication.getSalary());
-		jobApplication.setStatus(updatedJobApplication.getStatus());
+		jobApplication.setCompany(updatedJobApplication.company());
+		jobApplication.setDateApplied(updatedJobApplication.dateApplied());
+		jobApplication.setJobListingURL(updatedJobApplication.jobListingURL());
+		jobApplication.setPositionTitle(updatedJobApplication.positionTitle());
+		jobApplication.setSalary(updatedJobApplication.salary());
+		jobApplication.setStatus(updatedJobApplication.status());
+		jobApplication.setUser(user);
 		
 		return jobApplicationRepository.save(jobApplication);
 	}
