@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.codify.backend.dto.JobApplicationRequest;
 import com.codify.backend.model.JobApplication;
 import com.codify.backend.repository.JobApplicationRepository;
 import com.codify.backend.repository.UserRepository;
@@ -16,7 +18,7 @@ public class JobApplicationService {
 	UserRepository userRepository;
 	JobApplicationRepository jobApplicationRepository;
 	
-	public User verifyAuth(Authentication authentication) throws Exception {
+	public User getCurrentUser(Authentication authentication) throws Exception {
 		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 		User user = userRepository
 				.findByUsername(userPrincipal.getUsername())
@@ -29,19 +31,31 @@ public class JobApplicationService {
 		this.userRepository = userRepository;
 	}
 
-	public JobApplication getJobApplication(int id) throws Exception {
-		return jobApplicationRepository
+	public JobApplication getJobApplication(int id, Authentication authentication) throws Exception {
+		User user = getCurrentUser(authentication);
+		JobApplication jobApplication = jobApplicationRepository
 				.findById(id)
 				.orElseThrow(() -> new Exception("Job application not found."));
+		
+		return null;
 	}
 	
 	public List<JobApplication> getAllJobApplications(Authentication authentication) throws Exception {
-		User user = verifyAuth(authentication);
+		User user = getCurrentUser(authentication);
 		List<JobApplication> userJobApplications = jobApplicationRepository.findAllByUserId(user.getUserId());
 		return userJobApplications;
 	}
 	
-	public JobApplication createJobApplication(JobApplication jobApplication) {
+	public JobApplication createJobApplication(JobApplicationRequest jobApplicationRequest, Authentication authentication) throws Exception {
+		User user = getCurrentUser(authentication);
+		JobApplication jobApplication = new JobApplication(
+				jobApplicationRequest.positionTitle(),
+				jobApplicationRequest.company(),
+				jobApplicationRequest.salary(),
+				jobApplicationRequest.jobListingURL(),
+				jobApplicationRequest.status(),
+				jobApplicationRequest.dateApplied(),
+				user);
 		return jobApplicationRepository.save(jobApplication);
 	}
 	

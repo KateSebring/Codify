@@ -24,8 +24,8 @@ public class JobApplicationController {
 	
 	// TODO: add authentication as required parameter for each mapping
 	@GetMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id) throws Exception {
-		JobApplication jobApplication = jobApplicationService.getJobApplication(id);
+	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) throws Exception {
+		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
 		
 		return ResponseEntity.ok(new JobApplicationResponse(
 				jobApplication.getPositionTitle(),
