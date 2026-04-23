@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.codify.backend.dto.RegistrationRequest;
 import com.codify.backend.enums.Role;
+import com.codify.backend.exceptions.EmailAlreadyExistsException;
+import com.codify.backend.exceptions.MissingFieldException;
+import com.codify.backend.exceptions.UsernameAlreadyExistsException;
 import com.codify.backend.model.User;
 import com.codify.backend.repository.UserRepository;
 @Service
@@ -66,15 +69,15 @@ public class RegistrationService {
 		return user;
 	}
 	
-	public User register(RegistrationRequest request) throws Exception {
+	public User register(RegistrationRequest request) {
 		request = this.trimRequest(request);
 		
-		if(userRepository.existsByEmail(request.email()) || userRepository.existsByUsername(request.username())) {
-			throw new Exception("Error: Username or email already exists.");
-		}
-		
-		if(this.hasEmptyField(request)) {
-			throw new Exception("Error: empty field.");
+		if(userRepository.existsByEmail(request.email())) {
+			throw new EmailAlreadyExistsException();
+		} else if(userRepository.existsByUsername(request.username())) {
+			throw new UsernameAlreadyExistsException();
+		} else if (this.hasEmptyField(request)) {
+			throw new MissingFieldException();
 		}
 		
 		return userRepository.save(initializeUser(request));

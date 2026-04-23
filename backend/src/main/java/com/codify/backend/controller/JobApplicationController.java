@@ -7,7 +7,6 @@ import com.codify.backend.dto.JobApplicationResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) throws Exception {
+	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) {
 		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
 		
 		return ResponseEntity.ok(new JobApplicationResponse(
@@ -37,7 +36,7 @@ public class JobApplicationController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(@RequestBody Authentication authentication) throws Exception {
+	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(@RequestBody Authentication authentication) {
 		List<JobApplication> jobApplications = jobApplicationService.getAllJobApplications(authentication);
 		// TODO: replace this with a mapping helper class
 		List<JobApplicationResponse> jobApplicationResponses = new ArrayList<JobApplicationResponse>();
@@ -55,7 +54,7 @@ public class JobApplicationController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request, Authentication authentication) throws Exception {
+	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request, Authentication authentication) {
 		JobApplication jobApplication = jobApplicationService.createJobApplication(request, authentication);
 		JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
 				jobApplication.getPositionTitle(),
@@ -68,7 +67,7 @@ public class JobApplicationController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> updateJobApplication(@RequestBody int id, JobApplicationRequest request, Authentication authentication) throws Exception {
+	public ResponseEntity<JobApplicationResponse> updateJobApplication(@RequestBody int id, JobApplicationRequest request, Authentication authentication) {
 		JobApplication jobApplication = jobApplicationService.updateJobApplication(id, request, authentication);
 		JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
 				jobApplication.getPositionTitle(),

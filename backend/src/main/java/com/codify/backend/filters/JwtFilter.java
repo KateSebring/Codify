@@ -1,4 +1,4 @@
-package com.codify.backend.filter;
+package com.codify.backend.filters;
 
 import java.io.IOException;
 

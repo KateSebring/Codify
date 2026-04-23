@@ -19,14 +19,16 @@ public class RegistrationController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<RegistrationResponse> registerUser(@RequestBody RegistrationRequest request) throws Exception {
+	public ResponseEntity<RegistrationResponse> registerUser(@RequestBody RegistrationRequest request) {
 		User user = registrationService.register(request);
+		
 		RegistrationResponse response = new RegistrationResponse(
 				user.getUsername(),
 				user.getRoles().stream()
 				    .map(Enum::name)
 				    .collect(Collectors.toSet())
 			);
+		
 		return ResponseEntity.ok(response);
 	}
 }

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.codify.backend.filter.JwtFilter;
+import com.codify.backend.filters.JwtFilter;
 import com.codify.backend.service.CustomUserDetailsService;
 
 @Configuration

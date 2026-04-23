@@ -1,8 +1,5 @@
 package com.codify.backend.controller;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.codify.backend.dto.LoginResponse;
@@ -19,12 +16,13 @@ public class LoginController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) throws Exception {
+	public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest request) {
 		String token = authService.loginUser(request);
 		
 		LoginResponse response = new LoginResponse(
 				request.username().trim(),
 				token);
+		
 		return ResponseEntity.ok(response);
 	}
 }
