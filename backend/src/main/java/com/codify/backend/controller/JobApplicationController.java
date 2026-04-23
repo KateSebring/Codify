@@ -22,7 +22,6 @@ public class JobApplicationController {
 		this.jobApplicationService = jobApplicationService;
 	}
 	
-	// TODO: add authentication as required parameter for each mapping
 	@GetMapping("/{id}")
 	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) throws Exception {
 		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
@@ -56,9 +55,16 @@ public class JobApplicationController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request) {
-		// use mapper to pass in jobapplication object
-		return ResponseEntity.ok(null);
+	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request, Authentication authentication) throws Exception {
+		JobApplication jobApplication = jobApplicationService.createJobApplication(request, authentication);
+		JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
+				jobApplication.getPositionTitle(),
+				jobApplication.getCompany(),
+				jobApplication.getSalary(),
+				jobApplication.getJobListingURL(),
+				jobApplication.getStatus(),
+				jobApplication.getDateApplied());
+		return ResponseEntity.ok(jobApplicationResponse);
 	}
 	
 	@PutMapping("/{id}")
