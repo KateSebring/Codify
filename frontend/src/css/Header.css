@@ -6,10 +6,14 @@ header {
     align-items: center;
 }
 
-#header-links {
+#header-items {
     list-style: none;
     display: flex;
     gap: 3rem;
     color: #fdfdfd;
     font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #fdfdfd;
 }
