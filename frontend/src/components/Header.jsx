@@ -1,7 +1,19 @@
+import '../css/Header.css';
+import logo from '../logo.png';
+
 function Header() {
     return(
         <>
-            <p>Pretend there is a header here.</p>
+            <header>
+                <img src={logo} alt="Codify logo" />
+                <nav>
+                    <ul id="header-links">
+                        <li>Home</li>
+                        <li>Register</li>
+                        <li>Login</li>
+                    </ul>
+                </nav>
+            </header>
         </>
     );
 }
