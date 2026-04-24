@@ -1,0 +1,15 @@
+header {
+    background-color: #0077b6;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#header-links {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    color: #fdfdfd;
+    font-size: 1.5rem;
+}

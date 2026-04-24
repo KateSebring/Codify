@@ -1,11 +1,15 @@
 import Header from '../components/Header';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
+import '../css/Home.css';
+
 function Home() {
     return (
         <>
             <Header />
-            <h1>Welcome to my homepage.</h1>
-            <p>This is where all my home page stuff goes.</p>
+            <main>
+                <h1>Your center for tracking job applications.</h1>
+                <button>Register Now</button>
+            </main>
             <Footer />
         </>
     )
