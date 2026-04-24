@@ -1,0 +1,25 @@
+.dashboard {
+    flex: 1;
+    width: 100%;
+    margin: auto;
+}
+
+.page-header {
+    color: #002337;
+    text-align: center;
+    margin: 2rem;
+}
+
+.job-app-section {
+    min-height: 26rem;
+    background-color: #002337 ;
+    border-top: #0077b6 solid 7px;
+    border-bottom: #0077b6 solid 7px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+    padding: 4rem;
+}
