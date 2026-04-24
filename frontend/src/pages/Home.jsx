@@ -7,7 +7,7 @@ function Home() {
     return (
         <>
             <Header />
-            <main>
+            <main className='hero-page'>
                 <h1>Your center for tracking job applications.</h1>
                 <Link to="/register">
                     <button type="button">Register Now</button>
