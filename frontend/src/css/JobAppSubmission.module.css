@@ -1,4 +1,4 @@
-.form-section {
+.formSection {
     min-height: 26rem;
     background-color: #0077b6;
     padding: 4rem;
@@ -8,13 +8,13 @@
     color: #fdfdfd;
 }
 
-.job-submission-header {
+.jobSubmissionHeader {
     color: #002337;
     margin: 2rem;
     text-align: center;
 }
 
-.job-app-form {
+.jobAppForm {
     background-color: #002337;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     padding: 5rem;
 }
 
-.form-option {
+.formOption {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
@@ -34,9 +34,7 @@ input, label, select, option {
     font-size: 1.1rem;
 }
 
-
-
-.submit-form {
+.submitForm {
     border: none;
     width: 10rem;
     padding: 1rem;
