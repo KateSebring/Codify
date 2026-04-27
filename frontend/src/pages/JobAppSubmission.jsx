@@ -12,17 +12,17 @@ function JobAppSubmission() {
                     <form class='job-app-form'>
                         <div className='form-option'>
                             <label for='job-title'>Job Title</label>
-                            <input type='text' id='job-title' name='job-title'></input>
+                            <input type='text' id='job-title' name='job-title' placeholder='Job title...'></input>
                         </div>
 
                         <div className='form-option'>
                             <label for='company'>Company</label>
-                            <input type='text' id='company' name='company'></input>
+                            <input type='text' id='company' name='company' placeholder='Company...'></input>
                         </div>
 
                         <div className='form-option'>
                         <label for='hourly-pay'>Hourly Pay</label>
-                        <input type='text' id='hourly-pay' name='hourly-pay'></input>
+                        <input type='text' id='hourly-pay' name='hourly-pay' placeholder='0.00'></input>
                         </div>
 
                         <div className='form-option'>
