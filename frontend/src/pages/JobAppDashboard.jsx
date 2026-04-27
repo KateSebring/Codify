@@ -7,7 +7,7 @@ function JobAppDashboard() {
     return (
         <>
             <Header />
-            <main className='dashboard'>
+            <main>
                 <h1 className='page-header'>Your Applications</h1>
                 <section className='job-app-section'>
                     <JobAppCard />

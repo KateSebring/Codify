@@ -1,0 +1,17 @@
+.form-section {
+    min-height: 26rem;
+    background-color: #002337;
+    border-top: #0077b6 solid 7px;
+    border-bottom: #0077b6 solid 7px;
+    padding: 4rem;
+    margin-bottom: 3.5rem;
+    display: flex;
+    justify-content: center;
+    color: #fdfdfd;
+}
+
+main h1 {
+    color: #002337;
+    margin: 2rem;
+    text-align: center;
+}
