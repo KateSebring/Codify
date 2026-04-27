@@ -11,7 +11,6 @@ function JobAppDashboard() {
                 <h1 className='page-header'>Your Applications</h1>
                 <section className='job-app-section'>
                     <JobAppCard />
-
                 </section>
             </main>
             <Footer />
