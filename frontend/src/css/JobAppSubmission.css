@@ -1,8 +1,6 @@
 .form-section {
     min-height: 26rem;
-    background-color: #002337;
-    border-top: #0077b6 solid 7px;
-    border-bottom: #0077b6 solid 7px;
+    background-color: #0077b6;
     padding: 4rem;
     margin-bottom: 3.5rem;
     display: flex;
@@ -10,8 +8,42 @@
     color: #fdfdfd;
 }
 
-main h1 {
+.job-submission-header {
     color: #002337;
     margin: 2rem;
     text-align: center;
+}
+
+.job-app-form {
+    background-color: #002337;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding: 5rem;
+}
+
+.form-option {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+input, label, select {
+    font-family: 'Lucida Sans';
+    font-size: 1.1rem;
+}
+
+.submit-form {
+    border: none;
+    width: 10rem;
+    padding: 1rem;
+    background-color: #0077b6;
+    color: #fdfdfd;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 2rem;
+    font-family: 'Lucida Sans';
 }
