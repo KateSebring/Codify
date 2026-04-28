@@ -1,15 +1,15 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from '../css/JobAppSubmission.module.css'
+import styles from '../css/FormPages.module.css'
 
 function JobAppSubmission() {
     return(
         <>
             <Header />
             <main>
-                <h1 className={styles.jobSubmissionHeader}>Submit an Application</h1>
+                <h1 className='pageTitle'>Submit an Application</h1>
                 <section className={styles.formSection}>
-                    <form className={styles.jobAppForm}>
+                    <form className={styles.form}>
                         <p className={styles.formNote}>* = required</p>
                         <div className={styles.formOption}>
                             <label htmlFor='job-title'>Job Title<span className='required'>*</span></label>
