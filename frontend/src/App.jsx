@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import JobAppDashboard from "./pages/JobAppDashboard";
 import JobAppSubmission from "./pages/JobAppSubmission";
+import PageNotFound from "./pages/PageNotFound";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<JobAppDashboard />} />
       <Route path="/newApplication" element={<JobAppSubmission />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }
