@@ -24,6 +24,7 @@ main::before {
 
 main h1 {
     color: #fdfdfd;
+    font-size: 3rem;
 }
 
 button {
