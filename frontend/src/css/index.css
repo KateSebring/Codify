@@ -22,3 +22,7 @@ button {
     cursor: pointer;
     border-radius: 10px;
 }
+
+.required {
+  color: red;
+}

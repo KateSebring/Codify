@@ -10,23 +10,24 @@ function JobAppSubmission() {
                 <h1 className={styles.jobSubmissionHeader}>Submit an Application</h1>
                 <section className={styles.formSection}>
                     <form className={styles.jobAppForm}>
+                        <p className={styles.formNote}>* = required</p>
                         <div className={styles.formOption}>
-                            <label htmlFor='job-title'>Job Title</label>
-                            <input type='text' id='job-title' name='job-title' placeholder='Job title...'></input>
+                            <label htmlFor='job-title'>Job Title<span className='required'>*</span></label>
+                            <input type='text' id='job-title' name='job-title'></input>
                         </div>
 
                         <div className={styles.formOption}>
-                            <label htmlFor='company'>Company</label>
-                            <input type='text' id='company' name='company' placeholder='Company...'></input>
+                            <label htmlFor='company'>Company<span className='required'>*</span></label>
+                            <input type='text' id='company' name='company'></input>
                         </div>
 
                         <div className={styles.formOption}>
-                        <label htmlFor='hourly-pay'>Hourly Pay</label>
-                        <input type='text' id='hourly-pay' name='hourly-pay' placeholder='0.00'></input>
+                        <label htmlFor='hourly-pay'>Hourly Pay<span className='required'>*</span></label>
+                        <input type='text' id='hourly-pay' name='hourly-pay'></input>
                         </div>
 
                         <div className={styles.formOption}>
-                            <label htmlFor='app-status'>Application Status</label>
+                            <label htmlFor='app-status'>Application Status<span className='required'>*</span></label>
                             <select id='app-status' name='app-status'>
                                 <option value='applied'>Applied</option>
                                 <option value='applied'>Interviewed</option>

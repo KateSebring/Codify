@@ -8,13 +8,14 @@ function Login() {
             <h1 className={styles.header}>Login</h1>
             <section className={styles.loginFormSection}>
                 <form className={styles.loginForm}>
+                    <p className={styles.formNote}>* = required</p>
                     <div className={styles.formOption}>
-                        <label for='username'>Username</label>
+                        <label for='username'>Username<span className='required'>*</span></label>
                         <input type='text' id='username' name='username'></input>
                     </div>
 
                     <div className={styles.formOption}>
-                        <label for='password'>Password</label>
+                        <label for='password'>Password<span className='required'>*</span></label>
                         <input type='password' id='password' name='password'></input>
                     </div>
 

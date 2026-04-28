@@ -47,3 +47,7 @@ input, label, select, option {
     margin-top: 2rem;
     font-family: 'Lucida Sans';
 }
+
+.formNote {
+    font-family: 'Lucida Sans';
+}
