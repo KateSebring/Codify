@@ -1,10 +1,4 @@
-.page-header {
-    color: #002337;
-    text-align: center;
-    margin: 2rem;
-}
-
-.job-app-section {
+.jobAppSection {
     min-height: 26rem;
     background-color: #002337 ;
     border-top: #0077b6 solid 7px;

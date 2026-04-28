@@ -1,15 +1,15 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import JobAppCard from '../components/JobAppCard'
-import '../css/JobAppDashboard.css'
+import styles from '../css/JobAppDashboard.module.css'
 
 function JobAppDashboard() {
     return (
         <>
             <Header />
             <main>
-                <h1 className='page-header'>Your Applications</h1>
-                <section className='job-app-section'>
+                <h1 className='pageTitle'>Your Applications</h1>
+                <section className={styles.jobAppSection}>
                     <JobAppCard />
                 </section>
             </main>

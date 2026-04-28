@@ -1,10 +1,10 @@
-import '../css/JobAppCard.css';
+import styles from '../css/JobAppCard.module.css';
 
 function JobAppCard() {
     return(
         <>
-            <article className='jobAppCard'>
-                <ul className='jobTitle'>
+            <article className={styles.jobAppCard}>
+                <ul className={styles.jobTitle}>
                     <li>Job Title</li>
                 </ul>
                 <ul>
@@ -13,9 +13,9 @@ function JobAppCard() {
                     <li>Applied 01/01/2026</li>
                     <li><b>Status</b></li>
                 </ul>
-                <div className='button-row'>
-                    <button type='button'>Edit</button>
-                    <button type='button'>Delete</button>
+                <div className={styles.buttonRow}>
+                    <button type='button' className={styles.jobCardActionButtons}>Edit</button>
+                    <button type='button' className={styles.jobCardActionButtons}>Delete</button>
                 </div>
             </article>
         </>

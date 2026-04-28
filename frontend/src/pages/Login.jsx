@@ -1,13 +1,13 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from '../css/Login.module.css'
+import styles from '../css/FormPages.module.css'
 function Login() {
     return(
         <>
     <       Header />
-            <h1 className={styles.header}>Login</h1>
-            <section className={styles.loginFormSection}>
-                <form className={styles.loginForm}>
+            <h1 className='pageTitle'>Login</h1>
+            <section className={styles.formSection}>
+                <form className={styles.form}>
                     <p className={styles.formNote}>* = required</p>
                     <div className={styles.formOption}>
                         <label for='username'>Username<span className='required'>*</span></label>

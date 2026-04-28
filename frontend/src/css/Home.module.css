@@ -1,4 +1,4 @@
-.hero-page {
+.heroPage {
     position: relative;
     flex: 1;
     z-index: 1;
@@ -8,7 +8,7 @@
     justify-content: center;
 }
 
-main::before {
+.heroPage::before {
     content: "";
     position: absolute;
     top: 0;
@@ -22,11 +22,19 @@ main::before {
     z-index: -1;
 }
 
-main h1 {
+.tagline {
     color: #fdfdfd;
     font-size: 3rem;
 }
 
-button {
+.primaryCTA {
+    border: none;
+    width: 10rem;
+    padding: 1rem;
+    background-color: #002337;
+    color: #fdfdfd;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
     margin-top: 2rem;
 }

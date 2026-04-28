@@ -27,14 +27,18 @@ li {
     color: #fdfdfd;
 }
 
-.button-row {
+.buttonRow {
     display: flex;
 }
 
-.button-row button {
+.jobCardActionButtons {
     width: 5rem;
     padding: 0.5rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     font-family: 'Lucida Sans';
+    border: none;
+    background-color: #002337;
+    color: #fdfdfd;
+    border-radius: 5px;
 }

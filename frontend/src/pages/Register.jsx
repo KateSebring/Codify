@@ -1,13 +1,13 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import styles from '../css/Register.module.css'
+import styles from '../css/FormPages.module.css'
 function Register() {
     return(
         <>
             <Header />
-            <h1 className={styles.header}>Register</h1>
-            <section className={styles.registerFormSection}>
-                <form className={styles.registrationForm}>
+            <h1 className='pageTitle'>Register</h1>
+            <section className={styles.formSection}>
+                <form className={styles.form}>
                     <p className={styles.formNote}>* = required</p>
                     <div className={styles.formOption}>
                         <label for='firstName'>First Name<span className='required'>*</span></label>
