@@ -26,3 +26,9 @@ button {
 .required {
   color: red;
 }
+
+.pageTitle {
+    color: #002337;
+    margin: 2rem;
+    text-align: center;
+}
