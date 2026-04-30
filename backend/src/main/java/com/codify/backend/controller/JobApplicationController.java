@@ -21,22 +21,8 @@ public class JobApplicationController {
 		this.jobApplicationService = jobApplicationService;
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<JobApplicationResponse> getJobApplication(@RequestBody int id, Authentication authentication) {
-		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
-		
-		return ResponseEntity.ok(new JobApplicationResponse(
-				jobApplication.getPositionTitle(),
-				jobApplication.getCompany(),
-				jobApplication.getSalary(),
-				jobApplication.getJobListingURL(),
-				jobApplication.getStatus(),
-				jobApplication.getDateApplied()
-			));
-	}
-	
 	@GetMapping
-	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(@RequestBody Authentication authentication) {
+	public ResponseEntity<List<JobApplicationResponse>> getAllJobApplications(Authentication authentication) {
 		List<JobApplication> jobApplications = jobApplicationService.getAllJobApplications(authentication);
 		// TODO: replace this with a mapping helper class
 		List<JobApplicationResponse> jobApplicationResponses = new ArrayList<JobApplicationResponse>();
@@ -51,6 +37,20 @@ public class JobApplicationController {
 			jobApplicationResponses.add(jobApplicationResponse);
 		}
 		return ResponseEntity.ok(jobApplicationResponses);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<JobApplicationResponse> getJobApplication(@PathVariable int id, Authentication authentication) {
+		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
+		
+		return ResponseEntity.ok(new JobApplicationResponse(
+				jobApplication.getPositionTitle(),
+				jobApplication.getCompany(),
+				jobApplication.getSalary(),
+				jobApplication.getJobListingURL(),
+				jobApplication.getStatus(),
+				jobApplication.getDateApplied()
+			));
 	}
 	
 	@PostMapping
