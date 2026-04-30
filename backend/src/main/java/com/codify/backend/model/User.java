@@ -20,7 +20,7 @@ import lombok.Setter;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private int id;
 	private String username;
 	private String passwordHash;
 	private String firstName;

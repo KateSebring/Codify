@@ -34,13 +34,13 @@ public class JobApplicationService {
 	public JobApplication getJobApplication(int id, Authentication authentication) {
 		User user = getCurrentUser(authentication);
 		return  jobApplicationRepository
-				.findByIdAndUserId(id, user.getUserId())
+				.findByIdAndUserId(id, user.getId())
 				.orElseThrow(JobApplicationNotFoundException::new);
 	}
 	
 	public List<JobApplication> getAllJobApplications(Authentication authentication) {
 		User user = getCurrentUser(authentication);
-		return jobApplicationRepository.findAllByUserId(user.getUserId());
+		return jobApplicationRepository.findAllByUserId(user.getId());
 	}
 	
 	public JobApplication createJobApplication(JobApplicationRequest jobApplicationRequest, Authentication authentication) {
@@ -59,7 +59,7 @@ public class JobApplicationService {
 	public JobApplication updateJobApplication(int id, JobApplicationRequest updatedJobApplication, Authentication authentication) {
 		User user = getCurrentUser(authentication);
 		JobApplication jobApplication = jobApplicationRepository
-				.findByIdAndUserId(id, user.getUserId())
+				.findByIdAndUserId(id, user.getId())
 				.orElseThrow(() -> new JobApplicationNotFoundException());
 		
 		jobApplication.setCompany(updatedJobApplication.company());
@@ -75,7 +75,7 @@ public class JobApplicationService {
 	
 	public void deleteJobApplication(int id, Authentication authentication)  {
 		User user = getCurrentUser(authentication);
-		int deleted = jobApplicationRepository.deleteByIdAndUserId(id, user.getUserId());
+		int deleted = jobApplicationRepository.deleteByIdAndUserId(id, user.getId());
 		if(deleted == 0) {
 			throw new JobApplicationNotFoundException();
 		}
