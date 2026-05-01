@@ -9,6 +9,7 @@ import com.codify.backend.dto.LoginResponse;
 import com.codify.backend.dto.RegistrationRequest;
 import com.codify.backend.dto.RegistrationResponse;
 import com.codify.backend.model.User;
+import com.codify.backend.service.AuthResult;
 
 public class UserAuthDtoMapper {
 	private String clean(String value) {
@@ -26,7 +27,7 @@ public class UserAuthDtoMapper {
 			);
 	}
 	
-	public RegistrationResponse toRegistrationDto(User user) {
+	public RegistrationResponse toRegistrationResponse(User user) {
 		return new RegistrationResponse(
 				user.getUsername(),
 				user.getRoles().stream()
@@ -35,10 +36,10 @@ public class UserAuthDtoMapper {
 			);
 	}
 	
-	public LoginResponse toLoginDto(String token, LoginRequest request) {
+	public LoginResponse toLoginResponse(AuthResult result) {
 		return new LoginResponse(
-				request.username().trim(),
-				token
+				result.user().getUsername(),
+				result.token()
 			);
 	}
 }
