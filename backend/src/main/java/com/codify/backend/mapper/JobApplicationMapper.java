@@ -32,4 +32,14 @@ public class JobApplicationMapper {
 				jobApplication.getDateApplied()
 			);
 	}
+	
+	public void toUpdatedJobApplication(JobApplication jobApplication, JobApplicationRequest request, User user) {
+		jobApplication.setCompany(request.company());
+		jobApplication.setDateApplied(request.dateApplied());
+		jobApplication.setJobListingURL(request.jobListingURL());
+		jobApplication.setPositionTitle(request.positionTitle());
+		jobApplication.setSalary(request.salary());
+		jobApplication.setStatus(request.status());
+		jobApplication.setUser(user);
+	}
 }
