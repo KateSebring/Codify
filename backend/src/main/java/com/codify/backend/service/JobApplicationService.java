@@ -60,7 +60,7 @@ public class JobApplicationService {
 		User user = getCurrentUser(authentication);
 		JobApplication jobApplication = jobApplicationRepository
 				.findByIdAndUserId(id, user.getId())
-				.orElseThrow(() -> new JobApplicationNotFoundException());
+				.orElseThrow((JobApplicationNotFoundException::new));
 		
 		jobApplication.setCompany(updatedJobApplication.company());
 		jobApplication.setDateApplied(updatedJobApplication.dateApplied());
