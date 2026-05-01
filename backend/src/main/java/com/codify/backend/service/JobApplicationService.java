@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.codify.backend.dto.JobApplicationRequest;
 import com.codify.backend.exceptions.JobApplicationNotFoundException;
+import com.codify.backend.mapper.JobApplicationMapper;
 import com.codify.backend.model.JobApplication;
 import com.codify.backend.repository.JobApplicationRepository;
 import com.codify.backend.repository.UserRepository;
@@ -18,10 +19,12 @@ import com.codify.backend.model.User;
 public class JobApplicationService {
 	UserRepository userRepository;
 	JobApplicationRepository jobApplicationRepository;
+	JobApplicationMapper jobApplicationMapper;
 	
-	public JobApplicationService(JobApplicationRepository jobApplicationRepository, UserRepository userRepository) {
+	public JobApplicationService(JobApplicationRepository jobApplicationRepository, UserRepository userRepository, JobApplicationMapper jobApplicationMapper) {
 		this.jobApplicationRepository = jobApplicationRepository;
 		this.userRepository = userRepository;
+		this.jobApplicationMapper = jobApplicationMapper;
 	}
 	
 	public User getCurrentUser(Authentication authentication) {
@@ -43,32 +46,19 @@ public class JobApplicationService {
 		return jobApplicationRepository.findAllByUserId(user.getId());
 	}
 	
-	public JobApplication createJobApplication(JobApplicationRequest jobApplicationRequest, Authentication authentication) {
+	public JobApplication createJobApplication(JobApplicationRequest request, Authentication authentication) {
 		User user = getCurrentUser(authentication);
-		JobApplication jobApplication = new JobApplication(
-				jobApplicationRequest.positionTitle(),
-				jobApplicationRequest.company(),
-				jobApplicationRequest.salary(),
-				jobApplicationRequest.jobListingURL(),
-				jobApplicationRequest.status(),
-				jobApplicationRequest.dateApplied(),
-				user);
+		JobApplication jobApplication = jobApplicationMapper.toJobApplication(request, user);
 		return jobApplicationRepository.save(jobApplication);
 	}
 	
-	public JobApplication updateJobApplication(int id, JobApplicationRequest updatedJobApplication, Authentication authentication) {
+	public JobApplication updateJobApplication(int id, JobApplicationRequest request, Authentication authentication) {
 		User user = getCurrentUser(authentication);
 		JobApplication jobApplication = jobApplicationRepository
 				.findByIdAndUserId(id, user.getId())
-				.orElseThrow(() -> new JobApplicationNotFoundException());
+				.orElseThrow((JobApplicationNotFoundException::new));
 		
-		jobApplication.setCompany(updatedJobApplication.company());
-		jobApplication.setDateApplied(updatedJobApplication.dateApplied());
-		jobApplication.setJobListingURL(updatedJobApplication.jobListingURL());
-		jobApplication.setPositionTitle(updatedJobApplication.positionTitle());
-		jobApplication.setSalary(updatedJobApplication.salary());
-		jobApplication.setStatus(updatedJobApplication.status());
-		jobApplication.setUser(user);
+		jobApplicationMapper.toUpdatedJobApplication(jobApplication, request, user);
 		
 		return jobApplicationRepository.save(jobApplication);
 	}

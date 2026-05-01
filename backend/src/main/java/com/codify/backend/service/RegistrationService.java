@@ -80,6 +80,8 @@ public class RegistrationService {
 			throw new MissingFieldException();
 		}
 		
+		// use mapper to create new user
+		// and then save it via userRepository
 		return userRepository.save(initializeUser(request));
 	}
 }
