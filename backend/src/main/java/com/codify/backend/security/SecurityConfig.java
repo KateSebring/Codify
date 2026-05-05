@@ -35,8 +35,11 @@ public class SecurityConfig {
 			.csrf(csrf -> csrf.disable())
 			.httpBasic(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
-					.requestMatchers("/", "/api/auth/**").permitAll()
+					.requestMatchers("/", "/api/auth/**", "/h2-console/**").permitAll()
 					.anyRequest().authenticated())
+			.headers(headers -> headers
+		            .frameOptions(frame -> frame.sameOrigin())
+		    )
 			.sessionManagement(session ->
 					session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

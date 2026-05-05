@@ -43,9 +43,6 @@ public class JwtFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		Cookie cookie = WebUtils.getCookie(request, "jwt");
 		
-		System.out.println("JWT FILTER HIT");
-		System.out.println("Cookie: " + cookie);
-		
 		if(cookie == null) {
 			filterChain.doFilter(request, response);
 			return;
