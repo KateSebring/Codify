@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import { AuthContext } from './AuthContext';
+import { API_URL } from '../config'
 
 export function AuthProvider({ children }) {
     const [authUser, setAuthUser] = useState(null);
@@ -11,8 +12,9 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         async function checkAuth() {
             try {
-               const res = await fetch("/api/auth/checkAuth", {
-                    credentials: "include"
+               const res = await fetch(`${API_URL}/api/auth/checkAuth`, {
+                    method: 'GET',
+                    credentials: 'include'
                });
 
                if(res.ok) {

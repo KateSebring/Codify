@@ -18,3 +18,11 @@ header {
     color: #fdfdfd;
     font-size: 2rem;
 }
+
+.logout {
+    font: inherit;
+    cursor: pointer;
+    color: #fdfdfd;
+    font-size: 2rem;
+    text-decoration: underline;
+}

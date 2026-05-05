@@ -31,7 +31,7 @@ function Register() {
             });
 
             if(response.ok) {
-                console.log("Success!")
+                alert("Successfully registered!");
             }
         } catch (err) {
             console.error("Problem submitting form: ", err);

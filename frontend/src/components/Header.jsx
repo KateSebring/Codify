@@ -40,7 +40,7 @@ function Header() {
                             ) : (
                                 <>
                                     <li><Link to="/dashboard" className='nav-link'>Dashboard</Link></li>
-                                    <li className='nav-link' onClick={() => handleLogout()}></li>
+                                    <li className='nav-link logout' onClick={() => handleLogout()}>Logout</li>
                                 </>
                             )}
                         </ul>
