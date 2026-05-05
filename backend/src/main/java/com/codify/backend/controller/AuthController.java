@@ -49,10 +49,7 @@ public class AuthController {
 	}
 	
 	@GetMapping("/checkAuth")
-	public ResponseEntity<AuthResult> getCurrentUser(Authentication authentication) {
-		System.out.println("AUTHENTICATION");
-		System.out.println(authentication.getName());
-		
+	public ResponseEntity<AuthResult> getCurrentUser(Authentication authentication) {		
 		UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
 		return ResponseEntity.ok(new AuthResult(user.getUsername()));
 	}

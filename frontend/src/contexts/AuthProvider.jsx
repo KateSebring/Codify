@@ -1,12 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
+/* eslint-disable no-unused-vars */
+import React, {useState, useEffect} from 'react';
+import { AuthContext } from './AuthContext';
 
-const AuthContext = React.createContext();
-
-export function useAuth() {
-    return useContext(AuthContext);
-}
-
-export function AuthProvider(props) {
+export function AuthProvider({ children }) {
     const [authUser, setAuthUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -14,7 +10,18 @@ export function AuthProvider(props) {
     useEffect(() => {
         async function checkAuth() {
             try {
-               // do stuff here
+               const res = await fetch("/api/auth/checkAuth", {
+                    credentials: "include"
+               });
+
+               if(res.ok) {
+                const user = await res.json();
+                setAuthUser(user);
+                setIsLoggedIn(true);
+               } else {
+                setAuthUser(null);
+                setIsLoggedIn(false);
+               }
             } catch (err) {
                 setAuthUser(null);
                 setIsLoggedIn(false);
@@ -22,7 +29,9 @@ export function AuthProvider(props) {
                 setLoading(false);
             }
         }
-    })
+
+        checkAuth();
+    }, []);
 
     const value = {
         authUser,
@@ -33,7 +42,7 @@ export function AuthProvider(props) {
 
     return(
         <AuthContext.Provider value={value}>
-            {props.children}
+            {children}
         </AuthContext.Provider>
     )
 }

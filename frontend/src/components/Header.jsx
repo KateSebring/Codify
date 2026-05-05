@@ -1,7 +1,9 @@
 import '../css/Header.css';
 import logo from '../logo.png';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext.jsx';
+import { useAuth } from '../hooks/useAuth';
+import { API_URL } from '../config'
 
 function Header() {
     const {
@@ -13,7 +15,7 @@ function Header() {
 
     async function handleLogout() {
         try {
-            await fetch("/api/logout", {
+            await fetch(`${API_URL}/api/auth/logout`, {
                 method: "POST",
                 credentials: "include"
             });
