@@ -9,6 +9,7 @@ export function useAuth() {
 export function AuthProvider(props) {
     const [authUser, setAuthUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const value = {
         authUser,
@@ -18,6 +19,8 @@ export function AuthProvider(props) {
     }
 
     return(
-        <AuthContext.Provider value={value}>{props.children}</AuthContext.Provider>
+        <AuthContext.Provider value={value}>
+            {props.children}
+        </AuthContext.Provider>
     )
 }

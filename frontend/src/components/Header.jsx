@@ -1,7 +1,30 @@
 import '../css/Header.css';
 import logo from '../logo.png';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
 function Header() {
+    const {
+        authUser,
+        setAuthUser,
+        isLoggedIn,
+        setIsLoggedIn
+    } = useAuth();
+
+    async function handleLogout() {
+        try {
+            await fetch("/api/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+
+            setAuthUser(null);
+            setIsLoggedIn(false);
+        } catch (err) {
+            alert("Something went wrong! " + err);
+        }
+    }
+
     return(
         <>
             <header>
@@ -9,8 +32,22 @@ function Header() {
                 <nav>
                     <ul id="header-items">
                         <li><Link to="/" className='nav-link'>Home</Link></li>
-                        <li><Link to="/register" className='nav-link'>Register</Link></li>
-                        <li><Link to="/login" className='nav-link'>Login</Link></li>
+                        {!isLoggedIn ? (
+                            <>
+                                <li><Link to="/register" className='nav-link'>Register</Link></li>
+                                <li><Link to="/login" className='nav-link'>Login</Link></li>
+                            </>
+                        ) : (
+                            <>
+                                <li><Link to="/dashboard" className='nav-link'>Dashboard</Link></li>
+                                <li>
+                                    <button onClick={handleLogout}  className='nav-link'>
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        )}
+                        
                     </ul>
                 </nav>
             </header>
