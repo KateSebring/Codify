@@ -1,7 +1,7 @@
 import '../css/Header.css';
 import logo from '../logo.png';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext.jsx';
 
 function Header() {
     const {

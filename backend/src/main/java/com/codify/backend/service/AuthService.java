@@ -112,9 +112,7 @@ public class AuthService {
 		} else if (this.hasEmptyField(request)) {
 			throw new MissingFieldException();
 		}
-		
-		// use mapper to create new user
-		// and then save it via userRepository
+
 		return userRepository.save(initializeUser(request));
 	}
 }

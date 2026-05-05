@@ -3,14 +3,15 @@ package com.codify.backend.mapper;
 import java.util.stream.Collectors;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
-import com.codify.backend.dto.LoginRequest;
 import com.codify.backend.dto.LoginResponse;
 import com.codify.backend.dto.RegistrationRequest;
 import com.codify.backend.dto.RegistrationResponse;
 import com.codify.backend.model.User;
 import com.codify.backend.service.AuthResult;
 
+@Component
 public class UserAuthDtoMapper {
 	private String clean(String value) {
 	    return value == null ? null : value.trim();
@@ -38,8 +39,7 @@ public class UserAuthDtoMapper {
 	
 	public LoginResponse toLoginResponse(AuthResult result) {
 		return new LoginResponse(
-				result.user().getUsername(),
-				result.token()
+				result.username()
 			);
 	}
 }
