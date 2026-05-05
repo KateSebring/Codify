@@ -1,6 +1,7 @@
 package com.codify.backend.controller;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -35,7 +36,7 @@ public class AuthController {
 				.secure(true)
 				.path("/")
 				.maxAge(24 * 60 * 60)
-				.sameSite("Strict")
+				.sameSite("None")
 				.build();
 		return ResponseEntity.ok()
 				.header(HttpHeaders.SET_COOKIE, cookie.toString())
@@ -45,6 +46,7 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<RegistrationResponse> registerUser(@RequestBody RegistrationRequest request) {
 		User user = authService.register(request);
+		
 		return ResponseEntity.ok(mapper.toRegistrationResponse(user));
 	}
 	
