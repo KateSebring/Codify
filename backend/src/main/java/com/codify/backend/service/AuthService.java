@@ -40,7 +40,7 @@ public class AuthService {
 			);
 	}
 	
-	public AuthResult loginUser(LoginRequest request) {
+	public String loginUser(LoginRequest request) {
 		Authentication authentication;
 		
 		request = this.trimLoginRequest(request);	
@@ -51,7 +51,7 @@ public class AuthService {
 			throw new InvalidUsernameOrPasswordException();
 		}
 		
-		return new AuthResult((User) authentication.getPrincipal(), jwtService.generateToken(authentication));
+		return jwtService.generateToken(authentication);
 	}
 	
 	/*
