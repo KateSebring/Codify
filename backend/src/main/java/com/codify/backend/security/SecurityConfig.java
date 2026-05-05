@@ -33,10 +33,12 @@ public class SecurityConfig {
 	public SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
 		return http
 			.csrf(csrf -> csrf.disable())
-			.httpBasic(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
-					.requestMatchers("/", "/api/register", "/api/login").permitAll()
+					.requestMatchers("/", "/api/auth/**", "/h2-console/**").permitAll()
 					.anyRequest().authenticated())
+			.headers(headers -> headers
+		            .frameOptions(frame -> frame.sameOrigin())
+		    )
 			.sessionManagement(session ->
 					session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
