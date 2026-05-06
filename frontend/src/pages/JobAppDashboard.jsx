@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 
 function JobAppDashboard() {
     const { loading, isLoggedIn } = useAuth();
-    const [applications, setApplications] = useState(null);
+    const [applications, setApplications] = useState([]);
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -26,12 +26,12 @@ function JobAppDashboard() {
 
         const fetchApplications = async () => {
             try {
-                const response = fetch(`${API_URL}/api/applications`, {
+                const response = await fetch(`${API_URL}/api/applications`, {
                     method: 'GET',
                     credentials: 'include'
                 });
 
-                const data = (await response).json();
+                const data = await response.json();
 
                 setApplications(data);
 
@@ -50,7 +50,7 @@ function JobAppDashboard() {
                 <h1 className='pageTitle'>Your Applications</h1>
                 <section className={styles.jobAppSection}>
                     {applications.length === 0 ? (
-                        <p>No applications found.</p>
+                        <p className={styles.noAppsFound}>No applications found.</p>
                     ) : (
                         applications.map(app => (
                             <JobAppCard key={app.id} application={app} />

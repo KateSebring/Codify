@@ -11,3 +11,8 @@
     margin-bottom: 3.5rem;
     padding: 4rem;
 }
+
+.noAppsFound {
+    color: #fdfdfd;
+    font-size: 2rem;
+}
