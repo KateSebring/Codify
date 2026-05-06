@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import styles from '../css/FormPages.module.css'
 
 function JobAppSubmission() {
+    
     return(
         <>
             <Header />

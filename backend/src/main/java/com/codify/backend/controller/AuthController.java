@@ -2,6 +2,7 @@ package com.codify.backend.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,8 @@ import com.codify.backend.model.User;
 import com.codify.backend.model.UserPrincipal;
 import com.codify.backend.service.AuthResult;
 import com.codify.backend.service.AuthService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.codify.backend.dto.LoginRequest;
 import com.codify.backend.dto.LoginResponse;
@@ -52,6 +55,10 @@ public class AuthController {
 	
 	@GetMapping("/checkAuth")
 	public ResponseEntity<AuthResult> getCurrentUser(Authentication authentication) {		
+		if(authentication == null || !authentication.isAuthenticated()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		
 		UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
 		return ResponseEntity.ok(new AuthResult(user.getUsername()));
 	}

@@ -1,10 +1,21 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import styles from '../css/FormPages.module.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { API_URL } from '../config';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../hooks/useAuth';
 
 function Register() {
+    const { isLoggedIn, loading } = useAuth();
+    const navigate = useNavigate(); 
+
+    useEffect(() => {
+        if (!loading && isLoggedIn) {
+            navigate("/dashboard");
+        }
+    }, [isLoggedIn, loading, navigate]);
+                    
     const [formData, setFormData] = useState(
         {
             firstName: '',
@@ -32,6 +43,7 @@ function Register() {
 
             if(response.ok) {
                 alert("Successfully registered!");
+                navigate('/login');
             }
         } catch (err) {
             console.error("Problem submitting form: ", err);
