@@ -1,17 +1,17 @@
 import styles from '../css/JobAppCard.module.css';
 
-function JobAppCard() {
+function JobAppCard({ application }) {
     return(
         <>
             <article className={styles.jobAppCard}>
                 <ul className={styles.jobTitle}>
-                    <li>Job Title</li>
+                    <li>{application.jobTitle}</li>
                 </ul>
                 <ul>
-                    <li>$0.00/hr</li>
-                    <li>Company Name</li>
-                    <li>Applied 01/01/2026</li>
-                    <li><b>Status</b></li>
+                    <li>${application.salary}/hr</li>
+                    <li>{application.company}</li>
+                    <li>Applied {application.dateApplied}</li>
+                    <li><b>{application.status}</b></li>
                 </ul>
                 <div className={styles.buttonRow}>
                     <button type='button' className={styles.jobCardActionButtons}>Edit</button>
