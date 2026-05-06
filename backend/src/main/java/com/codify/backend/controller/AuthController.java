@@ -56,7 +56,7 @@ public class AuthController {
 	@GetMapping("/checkAuth")
 	public ResponseEntity<AuthResult> getCurrentUser(Authentication authentication) {		
 		if(authentication == null || !authentication.isAuthenticated()) {
-			return ResponseEntity.ok(new AuthResult(null));
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 		}
 		
 		UserPrincipal user = (UserPrincipal) authentication.getPrincipal();
