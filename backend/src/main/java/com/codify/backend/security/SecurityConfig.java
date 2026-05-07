@@ -33,6 +33,7 @@ public class SecurityConfig {
 	public SecurityFilterChain filterchain(HttpSecurity http) throws Exception {
 		return http
 			.csrf(csrf -> csrf.disable())
+			.cors(Customizer.withDefaults())
 			.authorizeHttpRequests((authorize) -> authorize
 					.requestMatchers("/", "/api/auth/**", "/h2-console/**").permitAll()
 					.anyRequest().authenticated())

@@ -12,7 +12,7 @@ function JobAppSubmission() {
                 company: '',
                 salary: '',
                 jobListingURL: '',
-                status: '',
+                status: 'APPLIED',
                 dateApplied: ''
             }
         );
@@ -26,6 +26,7 @@ function JobAppSubmission() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log(formData);
         try {
             const response = await fetch(`${API_URL}/api/applications`, {
                 method: 'POST',
@@ -37,6 +38,8 @@ function JobAppSubmission() {
             if(response.ok) {
                 alert("Job application successfully created!");
                 navigate('/dashboard');
+            } else {
+                alert("Submission failed. Please try again.");
             }
         } catch (err) {
             alert("Submission failed. " + err);
@@ -73,16 +76,16 @@ function JobAppSubmission() {
 
                         <div className={styles.formOption}>
                             <label htmlFor='status'>Application Status<span className='required'>*</span></label>
-                            <select id='status' name='status' onChange={handleChange}>
-                                <option value='applied'>Applied</option>
-                                <option value='interview'>Interviewed</option>
-                                <option value='offer'>Offer</option>
-                                <option value='rejected'>Rejected</option>
+                            <select id='status' name='status' value={formData.status} onChange={handleChange}>
+                                <option value='APPLIED'>Applied</option>
+                                <option value='INTERVIEW'>Interviewed</option>
+                                <option value='OFFER'>Offer</option>
+                                <option value='REJECTED'>Rejected</option>
                             </select>
                         </div>
 
                         <div className={styles.formOption}>
-                            <label htmlFor='dateApplied'>Date of Birth<span className='required'>*</span></label>
+                            <label htmlFor='dateApplied'>Date Applied<span className='required'>*</span></label>
                             <input type='date' id='dateApplied' name='dateApplied' onChange={handleChange}></input>
                         </div>
 

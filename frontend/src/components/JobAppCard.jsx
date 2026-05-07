@@ -4,8 +4,8 @@ function JobAppCard({ application }) {
     return(
         <>
             <article className={styles.jobAppCard}>
-                <ul className={styles.jobTitle}>
-                    <li>{application.jobTitle}</li>
+                <ul className={styles.positionTitle}>
+                    <li>{application.positionTitle}</li>
                 </ul>
                 <ul>
                     <li>${application.salary}/hr</li>
