@@ -33,7 +33,8 @@ public class JwtFilter extends OncePerRequestFilter {
 	protected boolean shouldNotFilter(HttpServletRequest request) {
 	    String path = request.getServletPath();
 	    
-	    return path.startsWith("/api/auth/login") ||
+	    return path.startsWith("/h2-console") ||
+	    		path.startsWith("/api/auth/login") ||
 	    		path.startsWith("/api/auth/register") ||
 	           path.equals("/") || path.isEmpty();
 	}
@@ -41,6 +42,11 @@ public class JwtFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		if (request.getMethod().equals("OPTIONS")) {
+		    filterChain.doFilter(request, response);
+		    return;
+		}
+		
 		Cookie cookie = WebUtils.getCookie(request, "jwt");
 		
 		if(cookie == null) {

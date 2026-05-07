@@ -28,6 +28,7 @@ public class JobApplicationController {
 		List<JobApplicationResponse> jobApplicationResponses = new ArrayList<JobApplicationResponse>();
 		for(JobApplication jobApplication : jobApplications) {
 			JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
+					jobApplication.getId(),
 					jobApplication.getPositionTitle(),
 					jobApplication.getCompany(),
 					jobApplication.getSalary(),
@@ -44,6 +45,7 @@ public class JobApplicationController {
 		JobApplication jobApplication = jobApplicationService.getJobApplication(id, authentication);
 		
 		return ResponseEntity.ok(new JobApplicationResponse(
+				jobApplication.getId(),
 				jobApplication.getPositionTitle(),
 				jobApplication.getCompany(),
 				jobApplication.getSalary(),
@@ -57,6 +59,7 @@ public class JobApplicationController {
 	public ResponseEntity<JobApplicationResponse> createJobApplication(@RequestBody JobApplicationRequest request, Authentication authentication) {
 		JobApplication jobApplication = jobApplicationService.createJobApplication(request, authentication);
 		JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
+				jobApplication.getId(),
 				jobApplication.getPositionTitle(),
 				jobApplication.getCompany(),
 				jobApplication.getSalary(),
@@ -70,6 +73,7 @@ public class JobApplicationController {
 	public ResponseEntity<JobApplicationResponse> updateJobApplication(@RequestBody int id, JobApplicationRequest request, Authentication authentication) {
 		JobApplication jobApplication = jobApplicationService.updateJobApplication(id, request, authentication);
 		JobApplicationResponse jobApplicationResponse = new JobApplicationResponse(
+				jobApplication.getId(),
 				jobApplication.getPositionTitle(),
 				jobApplication.getCompany(),
 				jobApplication.getSalary(),

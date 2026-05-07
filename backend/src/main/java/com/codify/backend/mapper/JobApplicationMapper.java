@@ -27,6 +27,7 @@ public class JobApplicationMapper {
 	
 	public JobApplicationResponse toJobApplicationDto(JobApplication jobApplication) {
 		return new JobApplicationResponse(
+				jobApplication.getId(),
 				jobApplication.getPositionTitle(),
 				jobApplication.getCompany(),
 				jobApplication.getSalary(),

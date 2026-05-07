@@ -62,12 +62,12 @@ function Login() {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <p className={styles.formNote}>* = required</p>
                     <div className={styles.formOption}>
-                        <label for='username'>Username<span className='required'>*</span></label>
+                        <label htmlFor='username'>Username<span className='required'>*</span></label>
                         <input type='text' id='username' name='username' onChange={handleChange}></input>
                     </div>
 
                     <div className={styles.formOption}>
-                        <label for='password'>Password<span className='required'>*</span></label>
+                        <label htmlFor='password'>Password<span className='required'>*</span></label>
                         <input type='password' id='password' name='password' onChange={handleChange}></input>
                     </div>
 
