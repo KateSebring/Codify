@@ -4,6 +4,7 @@ import com.codify.backend.enums.Status;
 import java.time.LocalDate;
 
 public record JobApplicationResponse(
+	int id,
 	String positionTitle,
 	String company,
 	int salary,
