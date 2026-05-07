@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.codify.backend.filters.JwtFilter;
 import com.codify.backend.service.CustomUserDetailsService;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -43,6 +45,14 @@ public class SecurityConfig {
 			.sessionManagement(session ->
 					session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+			.logout(logout -> logout
+	                .logoutUrl("/api/auth/logout")
+	                .deleteCookies("jwt")
+	                .clearAuthentication(true)
+	                .logoutSuccessHandler((request, response, authentication) -> {
+	                    response.setStatus(HttpServletResponse.SC_OK);
+	                })
+	        )
 			.build();
 	}
 
