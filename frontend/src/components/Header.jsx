@@ -3,8 +3,10 @@ import logo from '../logo.png';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { API_URL } from '../config'
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+    const navigate = useNavigate();
     const {
         setAuthUser,
         isLoggedIn,
@@ -13,12 +15,15 @@ function Header() {
 
     async function handleLogout() {
         try {
-            await fetch(`${API_URL}/api/auth/logout`, {
+            const response = await fetch(`${API_URL}/api/auth/logout`, {
                 method: "POST",
                 credentials: "include"
             });
 
-            setAuthUser(null);
+            if(response.ok) {
+                setAuthUser(null);
+                navigate('/login');
+            }
         } catch (err) {
             alert("Something went wrong! " + err);
         }
